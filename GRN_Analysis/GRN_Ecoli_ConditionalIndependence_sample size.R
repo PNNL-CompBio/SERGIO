@@ -106,9 +106,6 @@ con.ind <- function(df, bins, celltype, g){
 dot <- read.dot("C:/Projects/GitHub/Sergio_NM/GNW_sampled_GRNs/Ecoli_100_net1.dot") # GRN graph
 GRN <- read.table("C:/Projects/GitHub/Sergio_NM/data_sets/De-noised_100G_9T_300cPerT_4_DS1/Interaction_cID_4.txt", quote="\"", comment.char="")
 
-# Load simulated gene expressions
-# GRN_out <- read.csv("~/Missing data/SERGIO/Demo/GeneExpression_SingleCell.csv") # Simulated single cell data
-GRN_out <- read.csv("C:/Projects/GitHub/Sergio_NM/data_sets/De-noised_100G_9T_300cPerT_4_DS1/simulated_noNoise_0.csv") # Existing data
 
 # Load gene IDs
 #GeneIDs <- read.delim("~/Missing data/GRN_Analysis/GeneIDs.txt", header=FALSE) # Gene IDs
@@ -120,11 +117,22 @@ gene.geneID <- data.frame(cbind(Gene=GeneIDs, ID=0:99))
 gene.geneID$ID <- as.numeric(gene.geneID$ID)
 gene.geneID
 
+# Load simulated gene expressions
+# GRN_out <- read.csv("~/Missing data/SERGIO/Demo/GeneExpression_SingleCell.csv") # Simulated single cell data
+GRN_out <- read.csv("C:/Projects/GitHub/Sergio_NM/data_sets/De-noised_100G_9T_300cPerT_4_DS1/simulated_noNoise_0.csv") # Existing data
+GRN_out <- t(GRN_out[,-1])
+colnames(GRN_out) <- GeneIDs
+
 # Master regulators
 gene.geneID[gene.geneID$ID %in% c(67,17,56,44,62,93,84),]
 
 # Load data from Jeremy's DS.daggity file
 grn.dagitty <- read.delim("C:/Projects/GitHub/Sergio_NM/GRN_Analysis/DS1.dagitty", header=FALSE)
+
+# Load simulated data with gene names from Jeremy
+#GRN_out <- read.csv("C:/Projects/GitHub/Sergio_NM/data_sets/De-noised_100G_9T_300cPerT_4_DS1/simulated_noNoise_0.genes.csv") # Existing data
+#rownames(GRN_out) <- GRN_out[,1] 
+#GRN_out <- t(GRN_out[,-1])
 
 
 ############################# 
@@ -132,8 +140,6 @@ grn.dagitty <- read.delim("C:/Projects/GitHub/Sergio_NM/GRN_Analysis/DS1.dagitty
 #############################
 
 summary(GRN_out)
-GRN_out <- t(GRN_out[,-1])
-colnames(GRN_out) <- GeneIDs
 dim(GRN_out)
 head(GRN_out)
 
