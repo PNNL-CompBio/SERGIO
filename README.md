@@ -27,6 +27,8 @@ To download SERGIO, clone the repository via the following command (should take 
 
 ```git clone https://github.com/PayamDiba/SERGIO```
 
+```pip install -r requirements.txt``` in your environment
+
 
 ## Usage
 
